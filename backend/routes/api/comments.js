@@ -19,7 +19,7 @@
  * @param {string} req.body.text - The comment text content
  * @param {string} req.body.author - The author of the comment
  * @returns {Promise<void>} 201 status with the newly created comment object
- * @throws {Error} Returns 500 status with error message if creation fails
+ * @throws {Error} Returns 500 status with error message if creation fails..
  */
 
 /**
