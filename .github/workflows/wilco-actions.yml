@@ -9,19 +9,27 @@ jobs:
     timeout-minutes: 10
     name: Pr checks
 
+    services:
+      mongodb:
+        image: mongo:5.0
+        ports:
+          - 27017:27017
+        env:
+          MONGO_INITDB_DATABASE: conduit
+        options: >-
+          --health-cmd "mongosh --eval 'db.runCommand({ping: 1})'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 3
+
     steps:
       - name: Check out project
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "16"
-
-      - name: Start MongoDB
-        uses: supercharge/mongodb-github-action@1.6.0
-        with:
-          mongodb-version: "4.4"
 
       - uses: oNaiPs/secrets-to-env-action@v1
         with:
